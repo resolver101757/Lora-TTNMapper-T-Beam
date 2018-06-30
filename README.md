@@ -13,5 +13,4 @@ You can program the T-Beam using the [Arduino ESP32](https://github.com/espressi
 
 On The Things Network side, the settings needed are available [here](https://www.thethingsnetwork.org/docs/applications/ttnmapper/).
 
-Let me know if more detailed instructions are needed.
-
+You will need to fill in the src/config.template and name it config.h.
