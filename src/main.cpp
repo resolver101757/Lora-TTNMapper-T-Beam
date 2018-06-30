@@ -6,7 +6,6 @@
 #include <arduino.h>
 #include "esp_sleep.h"
 
-
 // UPDATE the config.h file in the same folder WITH YOUR TTN KEYS AND ADDR.
 #include "config.h"
 
@@ -18,6 +17,7 @@
 //Sleep code code
 #define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
 #define TIME_TO_SLEEP  60       /* Time ESP32 will go to sleep (in seconds) */
+
 
 
 // The TinyGPS++ object
@@ -232,6 +232,8 @@ void setup() {
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_SLOW_MEM, ESP_PD_OPTION_OFF);
   esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_FAST_MEM, ESP_PD_OPTION_OFF);
+
+
 }
 
 void loop() {
