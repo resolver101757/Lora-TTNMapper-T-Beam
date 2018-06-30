@@ -4,6 +4,8 @@
 #include <hal/hal.h>
 #include <WiFi.h>
 #include <arduino.h>
+#include "esp_sleep.h"
+
 
 // UPDATE the config.h file in the same folder WITH YOUR TTN KEYS AND ADDR.
 #include "config.h"
@@ -12,6 +14,11 @@
 #define BUILTIN_LED 21
 #define GPS_TX 12
 #define GPS_RX 15
+
+//Sleep code code
+#define uS_TO_S_FACTOR 1000000  /* Conversion factor for micro seconds to seconds */
+#define TIME_TO_SLEEP  60       /* Time ESP32 will go to sleep (in seconds) */
+
 
 // The TinyGPS++ object
 TinyGPSPlus gps;
@@ -218,8 +225,16 @@ void setup() {
   do_send(&sendjob);
   pinMode(BUILTIN_LED, OUTPUT);
   digitalWrite(BUILTIN_LED, LOW);
+
+  //sleep code
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_MAX, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_PERIPH, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_SLOW_MEM, ESP_PD_OPTION_OFF);
+  esp_sleep_pd_config(ESP_PD_DOMAIN_RTC_FAST_MEM, ESP_PD_OPTION_OFF);
 }
 
 void loop() {
   os_runloop_once();
+  esp_deep_sleep_start();
 }
