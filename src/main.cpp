@@ -78,7 +78,8 @@ void build_packet()
 
   hdopGps = gps.hdop.value()/10;
   txBuffer[8] = hdopGps & 0xFF;
-
+  Serial.println(hdopGps);
+  
   toLog = "";
   for(size_t i = 0; i<sizeof(txBuffer); i++)
   {
